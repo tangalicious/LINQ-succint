@@ -1,0 +1,20 @@
+  public void GetAllStreams()
+        {
+            try
+            {
+                using (StreamDataContext dbContext = new StreamDataContext())
+                {
+                    IEnumerable<StreamCatalog> streamlogs = from stream in dbContext.StreamCatalogs
+                                                            orderby stream.SCID ascending
+                                                            select stream;
+                    foreach (StreamCatalogs stream in streamlogs)
+                    {
+                        Console.WriteLine($"{feedCat.SCID} {feedCat.Name} {feedCat.Description} {feedCat.Creator}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
